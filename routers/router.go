@@ -1,6 +1,8 @@
 package routers
 
 import (
+	"go-gin-example/middleware/jwt"
+	"go-gin-example/routers/api"
 	v1 "go-gin-example/routers/api/v1"
 
 	"github.com/gin-gonic/gin"
@@ -10,6 +12,8 @@ func InitRouter() *gin.Engine {
 	router := gin.Default()
 	// router.Use(gin.Logger())
 	// r.Use(gin.Recovery())
+	router.GET("/auth", api.GetAuth)
+	router.Use(jwt.JWT())
 	//定义v1的路由
 	apiv1 := router.Group("/api/v1")
 	{
