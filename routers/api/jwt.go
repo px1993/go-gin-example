@@ -3,6 +3,7 @@ package api
 import (
 	"go-gin-example/e"
 	"go-gin-example/models"
+	"go-gin-example/pkg/logging"
 	"go-gin-example/util"
 	"net/http"
 
@@ -33,6 +34,7 @@ func GetAuth(c *gin.Context) {
 			} else {
 				code = e.SUCCESS
 				data["token"] = token
+				logging.Info(data["token"])
 			}
 		} else {
 			code = e.ERROR_AUTH
@@ -40,11 +42,11 @@ func GetAuth(c *gin.Context) {
 		msg = e.GetMsg(code)
 	} else {
 		for _, value := range valid.Errors {
+			logging.Info(value.Key, value.Message)
 			msg = value.Error()
 			break
 		}
 	}
-
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
 		"msg":  msg,
