@@ -15,7 +15,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//获取所有文章
+// @Summary 获取所有文章
+// @Tags 文章模块
+// @Produce  json
+// @Param title query string false "Title"
+// @Router /api/v1/articles [get]
 func GetArticles(c *gin.Context) {
 	title := c.Query("title")
 
@@ -40,7 +44,11 @@ func GetArticles(c *gin.Context) {
 
 }
 
-//获取单个文章
+// @Summary 获取指定文章
+// @Tags 文章模块
+// @Produce json
+// @Param id path int true "ID"
+// @Router /api/v1/articles/{id} [get]
 func GetArticle(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	code := e.INVALID_PARAMS
@@ -60,7 +68,17 @@ func GetArticle(c *gin.Context) {
 	})
 }
 
-//添加文章
+// @Summary 添加文章
+// @Tags 文章模块
+// @Produce  json
+// @Param id path int true "ID"
+// @Param title query string true "Title"
+// @Param desc query string false "Desc"
+// @Param content query string false "Content"
+// @Param created_by query string false "CreatedBy"
+// @Param tag_id query int false "tagId"
+// @Param state query int false "State"
+// @Router /api/v1/articles [post]
 func AddArticle(c *gin.Context) {
 	title := c.Query("title")
 	desc := c.Query("desc")
@@ -105,7 +123,17 @@ func AddArticle(c *gin.Context) {
 	})
 }
 
-//修改文章
+// @Summary 修改文章标签
+// @Tags 文章模块
+// @Produce  json
+// @Param id path int true "ID"
+// @Param title query string true "Title"
+// @Param desc query string false "Desc"
+// @Param content query string false "Content"
+// @Param modified_by query string false "ModifiedBy"
+// @Param tag_id query int false "TagId"
+// @Param state query int false "State"
+// @Router /api/v1/articles/{id} [put]
 func EditArticle(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	title := c.Query("title")
@@ -158,7 +186,11 @@ func EditArticle(c *gin.Context) {
 	})
 }
 
-//删除文章
+// @Summary 删除文章标签
+// @Tags 文章模块
+// @Produce  json
+// @Param id path int true "ID"
+// @Router /api/v1/articles/{id} [delete]
 func DeleteArticle(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	code := e.INVALID_PARAMS

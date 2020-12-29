@@ -1,6 +1,7 @@
 package v1
 
 import (
+	_ "go-gin-example/docs"
 	"go-gin-example/e"
 	"go-gin-example/models"
 	setting "go-gin-example/pkg"
@@ -12,6 +13,11 @@ import (
 	"github.com/unknwon/com"
 )
 
+// @Summary 获取所有标签
+// @Tags 文章模块
+// @Produce  json
+// @Param name query string false "Name"
+// @Router /api/v1/tags [get]
 func GetTags(c *gin.Context) {
 	name := c.Query("name")
 
@@ -42,7 +48,13 @@ func GetTags(c *gin.Context) {
 
 }
 
-//添加标签
+// @Summary 新增文章标签
+// @Tags 文章模块
+// @Produce  json
+// @Param name query string true "Name"
+// @Param state query int false "State"
+// @Param created_by query int false "CreatedBy"
+// @Router /api/v1/tags [post]
 func AddTasg(c *gin.Context) {
 	name := c.Query("name")
 	state := com.StrTo(c.Query("state")).MustInt()
@@ -56,6 +68,7 @@ func AddTasg(c *gin.Context) {
 	valid.Required(createdBy, "created_by").Message("createBy不能为空！")
 	valid.MaxSize(createdBy, 100, "created_by").Message("createBy最长为100个字符")
 
+	var data interface{}
 	code := e.INVALID_PARAMS
 	msg := e.GetMsg(code)
 	if !valid.HasErrors() {
@@ -74,11 +87,17 @@ func AddTasg(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
 		"msg":  msg,
-		"data": make([]int, 0),
+		"data": data,
 	})
 }
 
-//修改标签
+// @Summary 修改文章标签
+// @Tags 文章模块
+// @Produce  json
+// @Param id path int true "ID"
+// @Param name query string true "ID"
+// @Param modified_by query string true "ModifiedBy"
+// @Router /api/v1/tags/{id} [put]
 func EditTag(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	name := c.Query("name")
@@ -92,6 +111,7 @@ func EditTag(c *gin.Context) {
 	valid.MaxSize(name, 100, "name").Message("name不能超过100个字符")
 	valid.MaxSize(ModifiedBy, 100, "modified_by").Message("modified_by不能超过100个字符")
 
+	var data interface{}
 	code := e.INVALID_PARAMS
 	msg := e.GetMsg(code)
 	if !valid.HasErrors() {
@@ -114,11 +134,15 @@ func EditTag(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
 		"msg":  msg,
-		"data": make([]int, 0),
+		"data": data,
 	})
 }
 
-//删除标签
+// @Summary 删除文章标签
+// @Tags 文章模块
+// @Produce  json
+// @Param id path int true "ID"
+// @Router /api/v1/tags/{id} [delete]
 func DeleteTag(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	code := e.INVALID_PARAMS

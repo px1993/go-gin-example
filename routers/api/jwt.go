@@ -11,7 +11,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//获取token
+// @Version 1.0
+// @Summary 获取JwtToken
+// @Tags 用户模块
+// @Produce json
+// @Param username query string true "Username"
+// @Param password query string true "Password"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
+// @Router /auth [get]
 func GetAuth(c *gin.Context) {
 	username := c.Query("username")
 	password := c.Query("password")

@@ -6,16 +6,21 @@ import (
 	v1 "go-gin-example/routers/api/v1"
 
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
+
+	_ "go-gin-example/docs"
 )
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
 	// router.Use(gin.Logger())
-	// r.Use(gin.Recovery())
+	// router.Use(gin.Recovery())
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.GET("/auth", api.GetAuth)
-	router.Use(jwt.JWT())
 	//定义v1的路由
 	apiv1 := router.Group("/api/v1")
+	apiv1.Use(jwt.JWT())
 	{
 		apiv1.GET("/tags", v1.GetTags)
 		apiv1.POST("/tags", v1.AddTasg)
