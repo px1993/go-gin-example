@@ -1,9 +1,21 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {},
-        "license": {}
+        "description": "博客系统API文档",
+        "title": "Swagger Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
     },
+    "host": "127.0.0.1:8080",
     "paths": {
         "/api/v1/articles": {
             "get": {
@@ -17,11 +29,28 @@
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
                         "description": "Title",
                         "name": "title",
                         "in": "query"
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":[]}",
+                        "headers": {
+                            "Token": {
+                                "type": "string",
+                                "description": "qwerty"
+                            }
+                        }
+                    }
+                }
             },
             "post": {
                 "produces": [
@@ -33,11 +62,10 @@
                 "summary": "添加文章",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
+                        "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
                     },
                     {
                         "type": "string",
@@ -50,19 +78,22 @@
                         "type": "string",
                         "description": "Desc",
                         "name": "desc",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
                         "description": "Content",
                         "name": "content",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
                         "description": "CreatedBy",
                         "name": "created_by",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "integer",
@@ -74,9 +105,15 @@
                         "type": "integer",
                         "description": "State",
                         "name": "state",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":{}}"
+                    }
+                }
             }
         },
         "/api/v1/articles/{id}": {
@@ -90,13 +127,24 @@
                 "summary": "获取指定文章",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
+                    {
                         "type": "integer",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
                         "required": true
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":{}}"
+                    }
+                }
             },
             "put": {
                 "produces": [
@@ -107,6 +155,12 @@
                 ],
                 "summary": "修改文章标签",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
                     {
                         "type": "integer",
                         "description": "ID",
@@ -125,19 +179,22 @@
                         "type": "string",
                         "description": "Desc",
                         "name": "desc",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
                         "description": "Content",
                         "name": "content",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
                         "description": "ModifiedBy",
                         "name": "modified_by",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "integer",
@@ -149,9 +206,15 @@
                         "type": "integer",
                         "description": "State",
                         "name": "state",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":{}}"
+                    }
+                }
             },
             "delete": {
                 "produces": [
@@ -163,13 +226,24 @@
                 "summary": "删除文章标签",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
+                    {
                         "type": "integer",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
                         "required": true
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":{}}"
+                    }
+                }
             }
         },
         "/api/v1/tags": {
@@ -184,11 +258,22 @@
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
                         "description": "Name",
                         "name": "name",
                         "in": "query"
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":[]}"
+                    }
+                }
             },
             "post": {
                 "produces": [
@@ -199,6 +284,12 @@
                 ],
                 "summary": "新增文章标签",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
                     {
                         "type": "string",
                         "description": "Name",
@@ -218,7 +309,12 @@
                         "name": "created_by",
                         "in": "query"
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":{}}"
+                    }
+                }
             }
         },
         "/api/v1/tags/{id}": {
@@ -231,6 +327,12 @@
                 ],
                 "summary": "修改文章标签",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
                     {
                         "type": "integer",
                         "description": "ID",
@@ -252,7 +354,12 @@
                         "in": "query",
                         "required": true
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":{}}"
+                    }
+                }
             },
             "delete": {
                 "produces": [
@@ -264,13 +371,24 @@
                 "summary": "删除文章标签",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "token",
+                        "in": "header"
+                    },
+                    {
                         "type": "integer",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
                         "required": true
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"msg\":\"ok\", \"data\":{}}"
+                    }
+                }
             }
         },
         "/auth": {

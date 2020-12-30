@@ -16,7 +16,9 @@ import (
 // @Summary 获取所有标签
 // @Tags 文章模块
 // @Produce  json
+// @Param token header string false "Token"
 // @Param name query string false "Name"
+// @Success 200 "{"code":200,"msg":"ok", "data":[]}"
 // @Router /api/v1/tags [get]
 func GetTags(c *gin.Context) {
 	name := c.Query("name")
@@ -51,9 +53,11 @@ func GetTags(c *gin.Context) {
 // @Summary 新增文章标签
 // @Tags 文章模块
 // @Produce  json
+// @Param token header string false "Token"
 // @Param name query string true "Name"
 // @Param state query int false "State"
 // @Param created_by query int false "CreatedBy"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
 // @Router /api/v1/tags [post]
 func AddTasg(c *gin.Context) {
 	name := c.Query("name")
@@ -94,9 +98,11 @@ func AddTasg(c *gin.Context) {
 // @Summary 修改文章标签
 // @Tags 文章模块
 // @Produce  json
+// @Param token header string false "Token"
 // @Param id path int true "ID"
 // @Param name query string true "ID"
 // @Param modified_by query string true "ModifiedBy"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
 // @Router /api/v1/tags/{id} [put]
 func EditTag(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
@@ -141,7 +147,9 @@ func EditTag(c *gin.Context) {
 // @Summary 删除文章标签
 // @Tags 文章模块
 // @Produce  json
+// @Param token header string false "Token"
 // @Param id path int true "ID"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
 // @Router /api/v1/tags/{id} [delete]
 func DeleteTag(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()

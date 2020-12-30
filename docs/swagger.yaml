@@ -1,26 +1,46 @@
+host: 127.0.0.1:8080
 info:
-  contact: {}
-  license: {}
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: 博客系统API文档
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
 paths:
   /api/v1/articles:
     get:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: Title
         in: query
         name: title
         type: string
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":[]}'
+          headers:
+            Token:
+              description: qwerty
+              type: string
       summary: 获取所有文章
       tags:
       - 文章模块
     post:
       parameters:
-      - description: ID
-        in: path
-        name: id
-        required: true
-        type: integer
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: Title
         in: query
         name: title
@@ -29,14 +49,17 @@ paths:
       - description: Desc
         in: query
         name: desc
+        required: true
         type: string
       - description: Content
         in: query
         name: content
+        required: true
         type: string
       - description: CreatedBy
         in: query
         name: created_by
+        required: true
         type: string
       - description: tagId
         in: query
@@ -45,15 +68,23 @@ paths:
       - description: State
         in: query
         name: state
+        required: true
         type: integer
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":{}}'
       summary: 添加文章
       tags:
       - 文章模块
   /api/v1/articles/{id}:
     delete:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: ID
         in: path
         name: id
@@ -61,11 +92,18 @@ paths:
         type: integer
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":{}}'
       summary: 删除文章标签
       tags:
       - 文章模块
     get:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: ID
         in: path
         name: id
@@ -73,11 +111,18 @@ paths:
         type: integer
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":{}}'
       summary: 获取指定文章
       tags:
       - 文章模块
     put:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: ID
         in: path
         name: id
@@ -91,14 +136,17 @@ paths:
       - description: Desc
         in: query
         name: desc
+        required: true
         type: string
       - description: Content
         in: query
         name: content
+        required: true
         type: string
       - description: ModifiedBy
         in: query
         name: modified_by
+        required: true
         type: string
       - description: TagId
         in: query
@@ -107,26 +155,41 @@ paths:
       - description: State
         in: query
         name: state
+        required: true
         type: integer
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":{}}'
       summary: 修改文章标签
       tags:
       - 文章模块
   /api/v1/tags:
     get:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: Name
         in: query
         name: name
         type: string
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":[]}'
       summary: 获取所有标签
       tags:
       - 文章模块
     post:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: Name
         in: query
         name: name
@@ -142,12 +205,19 @@ paths:
         type: integer
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":{}}'
       summary: 新增文章标签
       tags:
       - 文章模块
   /api/v1/tags/{id}:
     delete:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: ID
         in: path
         name: id
@@ -155,11 +225,18 @@ paths:
         type: integer
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":{}}'
       summary: 删除文章标签
       tags:
       - 文章模块
     put:
       parameters:
+      - description: Token
+        in: header
+        name: token
+        type: string
       - description: ID
         in: path
         name: id
@@ -177,6 +254,9 @@ paths:
         type: string
       produces:
       - application/json
+      responses:
+        "200":
+          description: '{"code":200,"msg":"ok", "data":{}}'
       summary: 修改文章标签
       tags:
       - 文章模块

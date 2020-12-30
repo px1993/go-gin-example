@@ -18,7 +18,10 @@ import (
 // @Summary 获取所有文章
 // @Tags 文章模块
 // @Produce  json
+// @Param token header string false "Token"
 // @Param title query string false "Title"
+// @Success 200 "{"code":200,"msg":"ok", "data":[]}"
+// @Header 200 {string} Token "qwerty"
 // @Router /api/v1/articles [get]
 func GetArticles(c *gin.Context) {
 	title := c.Query("title")
@@ -30,7 +33,7 @@ func GetArticles(c *gin.Context) {
 		maps["title"] = title
 	}
 
-	code := e.INVALID_PARAMS
+	code := e.SUCCESS
 	msg := e.GetMsg(code)
 
 	data["count"] = models.GetArticlesTotal(maps)
@@ -47,7 +50,9 @@ func GetArticles(c *gin.Context) {
 // @Summary 获取指定文章
 // @Tags 文章模块
 // @Produce json
+// @Param token header string false "Token"
 // @Param id path int true "ID"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
 // @Router /api/v1/articles/{id} [get]
 func GetArticle(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
@@ -71,13 +76,14 @@ func GetArticle(c *gin.Context) {
 // @Summary 添加文章
 // @Tags 文章模块
 // @Produce  json
-// @Param id path int true "ID"
+// @Param token header string false "Token"
 // @Param title query string true "Title"
-// @Param desc query string false "Desc"
-// @Param content query string false "Content"
-// @Param created_by query string false "CreatedBy"
+// @Param desc query string true "Desc"
+// @Param content query string true "Content"
+// @Param created_by query string true "CreatedBy"
 // @Param tag_id query int false "tagId"
-// @Param state query int false "State"
+// @Param state query int true "State"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
 // @Router /api/v1/articles [post]
 func AddArticle(c *gin.Context) {
 	title := c.Query("title")
@@ -126,13 +132,15 @@ func AddArticle(c *gin.Context) {
 // @Summary 修改文章标签
 // @Tags 文章模块
 // @Produce  json
+// @Param token header string false "Token"
 // @Param id path int true "ID"
 // @Param title query string true "Title"
-// @Param desc query string false "Desc"
-// @Param content query string false "Content"
-// @Param modified_by query string false "ModifiedBy"
+// @Param desc query string true "Desc"
+// @Param content query string true "Content"
+// @Param modified_by query string true "ModifiedBy"
 // @Param tag_id query int false "TagId"
-// @Param state query int false "State"
+// @Param state query int true "State"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
 // @Router /api/v1/articles/{id} [put]
 func EditArticle(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
@@ -189,7 +197,9 @@ func EditArticle(c *gin.Context) {
 // @Summary 删除文章标签
 // @Tags 文章模块
 // @Produce  json
+// @Param token header string false "Token"
 // @Param id path int true "ID"
+// @Success 200 "{"code":200,"msg":"ok", "data":{}}"
 // @Router /api/v1/articles/{id} [delete]
 func DeleteArticle(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
